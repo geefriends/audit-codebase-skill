@@ -185,11 +185,17 @@ This skill never edits, deletes, or refactors code. It analyzes, reports, and re
 
 ```
 audit-codebase/
-├── SKILL.md         # the skill definition (read by Claude Code)
-├── checklist.md     # AI-Readiness Checklist reference document
-├── run-assay.sh     # wrapper for npx tryassay assess (handles 7-day caching)
-├── README.md        # this file
-└── LICENSE          # MIT
+├── SKILL.md                       # the skill router (read by Claude Code)
+├── references/
+│   ├── checklist.md               # AI-Readiness Checklist (scoring rubric, anti-patterns, red flags)
+│   ├── mode-ai.md                 # AI-readiness workflow
+│   ├── mode-bug.md                # Bug-assessment workflow (Assay)
+│   ├── mode-full.md               # Composes ai + bug + combined verdict
+│   ├── mode-deep.md               # Full + Codex adversarial + synthesis
+│   └── report-templates.md        # All report templates (one per mode)
+├── run-assay.sh                   # wrapper for npx tryassay assess (handles 7-day caching)
+├── README.md                      # this file
+└── LICENSE                        # MIT
 ```
 
 ## Related

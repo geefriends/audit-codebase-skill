@@ -3,9 +3,11 @@
 # Usage: run-assay.sh <project-path>
 #
 # Runs npx tryassay assess on the given project path.
-# Output goes to <project-path>/.assay-assessment/
+# Output goes to <project-path>/.assay/
 
 set -euo pipefail
+
+[ -f "$HOME/Developer/.env" ] && set -a && source "$HOME/Developer/.env" && set +a
 
 PROJECT_PATH="${1:-.}"
 
@@ -18,7 +20,7 @@ if [ ! -d "$PROJECT_PATH" ]; then
 fi
 
 # Check if assessment already exists and is recent (< 7 days)
-ASSESSMENT_DIR="$PROJECT_PATH/.assay-assessment"
+ASSESSMENT_DIR="$PROJECT_PATH/.assay"
 if [ -d "$ASSESSMENT_DIR" ]; then
   SUMMARY="$ASSESSMENT_DIR/assessment-summary.json"
   if [ -f "$SUMMARY" ]; then
@@ -42,7 +44,7 @@ if [ -d "$ASSESSMENT_DIR" ]; then
 fi
 
 echo "RUNNING_ASSESSMENT:$PROJECT_PATH"
-npx tryassay assess "$PROJECT_PATH"
+npx tryassay assess --yes --no-publish "$PROJECT_PATH"
 
 if [ -d "$ASSESSMENT_DIR" ]; then
   echo "ASSESSMENT_COMPLETE:$ASSESSMENT_DIR"
